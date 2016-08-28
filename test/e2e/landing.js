@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
 
 const webdriver = require('selenium-webdriver'),
-      chrome = require('selenium-webdriver/chrome');
+      phantomjs = require('selenium-webdriver/phantomjs');
 
 const driver = new webdriver.Builder()
-  .forBrowser('chrome')
+  .forBrowser('phantomjs')
   .build();
 
 const chai = require('chai'),
