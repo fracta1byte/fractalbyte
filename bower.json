@@ -1,0 +1,13 @@
+{
+  "name": "fractalbyte",
+  "description": "Fractal Byte Landing",
+  "main": "index.js",
+  "authors": [
+    "tr0ythex"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/fracta1byte/fractalbyte",
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

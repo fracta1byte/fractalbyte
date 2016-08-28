@@ -21,6 +21,7 @@
   "homepage": "https://github.com/fracta1byte/fractalbyte#readme",
   "devDependencies": {
     "chai": "^3.5.0",
+    "gulp-inject": "^4.1.0",
     "lite-server": "^2.2.2",
     "mocha": "^3.0.2",
     "selenium-webdriver": "^3.0.0-beta-2"
