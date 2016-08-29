@@ -5,7 +5,8 @@ const gulp = require('gulp'),
       browserSync = require('browser-sync'),
       sass = require('gulp-sass'),
       wiredep = require('wiredep').stream,
-      useref = require('gulp-useref');
+      useref = require('gulp-useref'),
+      reload = browserSync.reload;
 
 // Инжектировать все min.js и min.css файлы из bower_components в index.html
 // между <!-- inject:{js,css} --> <!-- endinject -->
@@ -33,13 +34,17 @@ gulp.task('serve', () => {
       }
     }
   });
+  
+  gulp.watch('app/*.html').on('change', reload);
+  gulp.watch('app/styles/**/*.sass', ['sass']);
 });
 
 // Скомпилировать .sass в .css
 gulp.task('sass', () => {
   gulp.src('app/styles/sass/**/*.sass')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('app/styles'));
+    .pipe(gulp.dest('app/styles'))
+    .pipe(reload({stream: true})); // перезагрузить browserSync
 });
 
 // Вставить bower-зависимости, прописанные в bower.json dependencies
