@@ -3,10 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title>Fractal Byte</title>
+
     <!-- inject:css -->
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- endinject -->
+
+    <!-- build:css styles/vendor.css -->
+    <link rel="stylesheet" href="styles/vendor.css">
+      <!-- bower:css -->
+        <!-- TODO: gulp task на подключение вендорных .css файлов прямо в index.html -->
+      <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
   </head>
   <body>
     <div class="row">
@@ -24,11 +34,8 @@
       <div class="col-md-4">Second</div>
       <div class="col-md-4">Third</div>
     </div>
+
     <!-- inject:js -->
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/bower_components/jquery/dist/jquery.slim.min.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/bower_components/jquery/external/sizzle/dist/sizzle.min.js"></script>
     <!-- endinject -->
   </body>
 </html>
