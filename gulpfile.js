@@ -34,7 +34,7 @@ gulp.task('serve', () => {
       }
     }
   });
-  
+
   gulp.watch('app/*.html').on('change', reload);
   gulp.watch('app/styles/**/*.sass', ['sass']);
 });
@@ -48,11 +48,17 @@ gulp.task('sass', () => {
 });
 
 // Вставить bower-зависимости, прописанные в bower.json dependencies
-// в файл vendor.sass между <!-- bowers:scss --> и <!-- endbower -->
+// между <!-- bowers:scss --> и <!-- endbower -->
 gulp.task('wiredep', () => {
   gulp.src('app/styles/sass/vendor.sass')
     .pipe(wiredep())
     .pipe(gulp.dest('app/styles/sass'));
+
+  gulp.src('app/index.html')
+    .pipe(wiredep({
+      exclude: [ /jquery/ ]
+    }))
+    .pipe(gulp.dest('app'));
 });
 
 // useref находит в index.html файле участок
