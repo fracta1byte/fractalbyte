@@ -1,0 +1,32 @@
+{
+  "name": "fractalbyte",
+  "version": "0.0.1",
+  "description": "Fractal Byte Landing",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/unit -u bdd -R spec -t 500 --recursive",
+    "watch": "mocha test/unit -u bdd -R spec -t 500 --recursive --watch",
+    "dev": "lite-server",
+    "e2e-test": "mocha test/e2e -u bdd -R spec -t 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fracta1byte/fractalbyte.git"
+  },
+  "author": "tr0ythex",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fracta1byte/fractalbyte/issues"
+  },
+  "homepage": "https://github.com/fracta1byte/fractalbyte#readme",
+  "devDependencies": {
+    "browser-sync": "^2.14.0",
+    "chai": "^3.5.0",
+    "gulp-inject": "^4.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-useref": "^3.1.0",
+    "mocha": "^3.0.2",
+    "selenium-webdriver": "^3.0.0-beta-2",
+    "wiredep": "^4.0.0"
+  }
+}
