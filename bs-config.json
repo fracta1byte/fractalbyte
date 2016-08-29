@@ -1,6 +1,0 @@
-/* Setup for Lite Server */
-{
-  "port": 8000,
-  "files": ["./app/**/*.{html,htm,css,js}"],
-  "server": { "baseDir": "./app" }
-}
