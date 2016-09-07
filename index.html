@@ -16,8 +16,17 @@
   </head>
   <body ng-app="fractalByte">
     <ng-view></ng-view>
+
     <!-- bower:js -->
-    <script src="../bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
+
+    <!-- build:js scipts/scripts.js -->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.routes.js"></script>
+    <!-- Components -->
+    <script src="app/components/home/homeController.js"></script>
+    <!-- endbuild -->
   </body>
 </html>

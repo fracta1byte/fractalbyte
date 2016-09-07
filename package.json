@@ -4,10 +4,9 @@
     "description": "Fractal Byte Landing",
     "main": "index.js",
     "scripts": {
-        "test": "mocha test/unit -u bdd -R spec -t 500 --recursive",
-        "watch": "mocha test/unit -u bdd -R spec -t 500 --recursive --watch",
-        "dev": "lite-server",
-        "e2e-test": "mocha test/e2e -u bdd -R spec -t 10000"
+        "test": "mocha test/spec/unit -u bdd -R spec -t 500 --recursive",
+        "watch": "mocha test/spec/unit -u bdd -R spec -t 500 --recursive --watch",
+        "e2e-test": "~/.npm-packages/bin/protractor test/spec/e2e/protractor/conf.js"
     },
     "repository": {
         "type": "git",
@@ -22,10 +21,11 @@
     "devDependencies": {
         "browser-sync": "^2.14.0",
         "chai": "^3.5.0",
-        "gulp-inject": "^4.1.0",
+        "gulp": "^3.9.1",
         "gulp-sass": "^2.3.2",
         "gulp-useref": "^3.1.0",
         "mocha": "^3.0.2",
+        "protractor": "^4.0.4",
         "selenium-webdriver": "^3.0.0-beta-2",
         "wiredep": "^4.0.0"
     }
