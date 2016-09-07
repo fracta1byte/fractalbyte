@@ -19,10 +19,10 @@ describe('Main page', () => {
     .then(() => done());
   });
 
-  it('should have a title with text "You Active 24"', (done) => {
+  it('should have a title with text "Fractal Byte"', (done) => {
     driver.getTitle()
     .then((title) => {
-      expect(title).to.be.equal('You Active 24');
+      expect(title).to.be.equal('Fractal Byte');
     })
     .then(() => done());
   });
