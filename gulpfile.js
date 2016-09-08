@@ -5,6 +5,13 @@ const gulp = require('gulp'),
       sass = require('gulp-sass'),
       wiredep = require('wiredep').stream,
       useref = require('gulp-useref'),
+      jshint = require('gulp-jshint'),
+      babel = require('gulp-babel'),
+      gulpif = require('gulp-if'),
+      uglify = require('gulp-uglify'),
+      cssnano = require('gulp-cssnano'),
+      htmlmin = require('gulp-htmlmin'),
+      size = require('gulp-size'),
       reload = browserSync.reload;
 
 gulp.task('styles', () => {
@@ -16,6 +23,9 @@ gulp.task('styles', () => {
 
 gulp.task('scripts', () => {
     gulp.src('app/**/*.js')
+        .pipe(babel({
+            presets: ['es2015']
+        }))
         .pipe(gulp.dest('.tmp/app'))
         .pipe(reload({stream: true}));
 });
@@ -23,6 +33,10 @@ gulp.task('scripts', () => {
 // for production
 gulp.task('html', ['styles', 'scripts'], () => {
     gulp.src('**/*.html')
+        .pipe(useref({searchPath: ['.tmp', 'app', '.']}))
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.css', cssnano({safe: true, autoprefixer: false})))
+        .pipe(gulpif('*.html', htmlmin({collapseWhitespace: true})))
         .pipe(gulp.dest('dist'));
 });
 
@@ -44,7 +58,12 @@ gulp.task('serve:dev', ['styles', 'scripts'], () => {
     gulp.watch('app/**/*.js', ['scripts']);
 });
 
-// TODO: write task for prod server
+gulp.task('build', ['lint', 'html'], () => {
+    gulp.src('dist/**/*')
+        .pipe(size({title: 'build', gzip: true})); // logs gzipped size of site
+});
+
+// TODO: add task for images and fonts
 
 // <!-- bowers:scss --> и <!-- endbower -->
 gulp.task('wiredep', () => {
@@ -64,4 +83,10 @@ gulp.task('useref', () => {
     gulp.src('index.html')
         .pipe(useref())
         .pipe(gulp.dest('dist'));
+});
+
+gulp.task('lint', () => {
+    gulp.src('app/**/*.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'));
 });
