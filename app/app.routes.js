@@ -2,12 +2,12 @@
 
 angular.module('fractalByte')
 .config(function($routeProvider) {
-  $routeProvider
+    $routeProvider
     .when('/', {
-      templateUrl: './components/home/homeView.html',
-      controller: 'homeController'
+        templateUrl: './components/home/homeView.html',
+        controller: 'homeController'
     })
     .otherwise({
-      redirectTo: '/'
+        redirectTo: '/'
     });
 });

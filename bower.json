@@ -1,20 +1,20 @@
 {
-  "name": "fractalbyte",
-  "description": "Fractal Byte Landing",
-  "main": "index.js",
-  "authors": [
-    "tr0ythex"
-  ],
-  "license": "ISC",
-  "homepage": "https://github.com/fracta1byte/fractalbyte",
-  "dependencies": {
-    "bootstrap-sass": "^3.3.7",
-    "angular": "^1.5.8",
-    "angular-route": "^1.5.8"
-  },
-  "overrides": {
-    "bootstrap-sass": {
-      "main": "assets/stylesheets/_bootstrap.scss"
+    "name": "fractalbyte",
+    "description": "Fractal Byte Landing",
+    "main": "index.js",
+    "authors": [
+        "tr0ythex"
+    ],
+    "license": "ISC",
+    "homepage": "https://github.com/fracta1byte/fractalbyte",
+    "dependencies": {
+        "bootstrap-sass": "^3.3.7",
+        "angular": "^1.5.8",
+        "angular-route": "^1.5.8"
+    },
+    "overrides": {
+        "bootstrap-sass": {
+            "main": "assets/stylesheets/_bootstrap.scss"
+        }
     }
-  }
 }
