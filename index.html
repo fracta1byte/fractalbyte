@@ -5,28 +5,34 @@
     <title>Fractal Byte</title>
 
     <!-- build:css styles/vendor.css -->
-    <link rel="stylesheet" href="styles/vendor.css">
+    <link rel="stylesheet" href="assets/styles/vendor.css">
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="assets/styles/main.css">
     <!-- endbuild -->
   </head>
   <body ng-app="fractalByte">
     <ng-view></ng-view>
 
+    <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
+    <!-- endbuild -->
 
-    <!-- build:js scipts/scripts.js -->
+    <!-- build:js scripts/scripts.js -->
     <script src="app/app.module.js"></script>
     <script src="app/app.routes.js"></script>
     <!-- Components -->
     <script src="app/components/home/homeController.js"></script>
     <!-- endbuild -->
+
+    <script src="scripts/templates.js">
+
+    </script>
   </body>
 </html>

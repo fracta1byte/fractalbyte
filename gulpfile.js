@@ -10,8 +10,11 @@ const gulp = require('gulp'),
       gulpif = require('gulp-if'),
       uglify = require('gulp-uglify'),
       cssnano = require('gulp-cssnano'),
-      htmlmin = require('gulp-htmlmin'),
       size = require('gulp-size'),
+      ngAnnotate = require('gulp-ng-annotate'),
+      rimraf = require('rimraf'),
+      runSequence = require('run-sequence'),
+      templateCache = require('gulp-angular-templatecache'),
       reload = browserSync.reload;
 
 gulp.task('styles', () => {
@@ -30,13 +33,34 @@ gulp.task('scripts', () => {
         .pipe(reload({stream: true}));
 });
 
+gulp.task('html', () => {
+    gulp.src('app/**/*.html')
+        .pipe(templateCache({
+            module: 'fractalByte',
+            root: '.',
+            standalone: false
+        }))
+        .pipe(gulp.dest('dist/scripts'));
+});
+
+gulp.task('clean:tmp', function (cb) {
+  rimraf('./.tmp', cb);
+});
+gulp.task('clean:dist', function (cb) {
+  rimraf('./dist', cb);
+});
+
 // for production
-gulp.task('html', ['styles', 'scripts'], () => {
-    gulp.src('**/*.html')
+gulp.task('build', () => {
+    runSequence('clean:dist', 'styles', 'scripts', 'html', 'client:build');
+});
+
+gulp.task('client:build', () => {
+    gulp.src('index.html')
         .pipe(useref({searchPath: ['.tmp', 'app', '.']}))
+        .pipe(gulpif('*.js', ngAnnotate()))
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', cssnano({safe: true, autoprefixer: false})))
-        .pipe(gulpif('*.html', htmlmin({collapseWhitespace: true})))
         .pipe(gulp.dest('dist'));
 });
 
@@ -58,10 +82,20 @@ gulp.task('serve:dev', ['styles', 'scripts'], () => {
     gulp.watch('app/**/*.js', ['scripts']);
 });
 
-gulp.task('build', ['lint', 'html'], () => {
-    gulp.src('dist/**/*')
-        .pipe(size({title: 'build', gzip: true})); // logs gzipped size of site
+gulp.task('serve:prod', () => {
+    browserSync({
+        notify: false,
+        port: 9000,
+        server: {
+            baseDir: ['dist']
+        }
+    });
 });
+
+// gulp.task('build', ['lint', 'html'], () => {
+//     gulp.src('dist/**/*')
+//         .pipe(size({title: 'build', gzip: true})); // logs gzipped size of site
+// });
 
 // TODO: add task for images and fonts
 
@@ -81,7 +115,7 @@ gulp.task('wiredep', () => {
 // <!-- build:css styles/vendor.css --> <!-- endbuild -->
 gulp.task('useref', () => {
     gulp.src('index.html')
-        .pipe(useref())
+        .pipe(useref({searchPath: ['.tmp', 'app']}))
         .pipe(gulp.dest('dist'));
 });
 
