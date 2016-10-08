@@ -15,6 +15,7 @@ const gulp = require('gulp'),
       rimraf = require('rimraf'),
       runSequence = require('run-sequence'),
       templateCache = require('gulp-angular-templatecache'),
+      inject = require('gulp-inject'),
       reload = browserSync.reload;
 
 gulp.task('styles', () => {
@@ -40,6 +41,7 @@ gulp.task('html', () => {
             root: '.',
             standalone: false
         }))
+        .pipe(gulp.dest('.tmp/scripts'))
         .pipe(gulp.dest('dist/scripts'));
 });
 
@@ -57,6 +59,16 @@ gulp.task('build', () => {
 
 gulp.task('client:build', () => {
     gulp.src('index.html')
+        .pipe(inject(
+            gulp.src(
+                '.tmp/scripts/templates.js',
+                {read: false}
+            ),
+            {
+                ignorePath: '.tmp',
+                addRootSlash: false
+            }
+        ))
         .pipe(useref({searchPath: ['.tmp', 'app', '.']}))
         .pipe(gulpif('*.js', ngAnnotate()))
         .pipe(gulpif('*.js', uglify()))
@@ -70,7 +82,7 @@ gulp.task('serve:dev', ['styles', 'scripts'], () => {
         notify: false,
         port: 8000,
         server: {
-            baseDir: ['.tmp/assets', './'],
+            baseDir: ['.tmp', '.', 'app'],
             routes: {
                 '/bower_components': 'bower_components'
             }
@@ -91,11 +103,6 @@ gulp.task('serve:prod', () => {
         }
     });
 });
-
-// gulp.task('build', ['lint', 'html'], () => {
-//     gulp.src('dist/**/*')
-//         .pipe(size({title: 'build', gzip: true})); // logs gzipped size of site
-// });
 
 // TODO: add task for images and fonts
 
