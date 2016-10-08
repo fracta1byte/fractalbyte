@@ -1,7 +1,7 @@
 exports.config = {
     framework: 'jasmine',
     directConnect: true,
-    specs: ['mainPageSpec.js'],
+    specs: ['./spec/mainPageSpec.js'],
     capabilities: {
         'browserName': 'chrome'
     },
